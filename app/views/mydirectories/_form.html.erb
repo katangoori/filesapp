@@ -1,0 +1,12 @@
+<%= form_tag("/mydirectories", method: :post) do %>
+  <div class="field">
+    <%= label_tag :name %><br>
+    <%= text_field_tag :name %>
+	<% if params[:path] %>
+	  <%= hidden_field_tag :path, request[:path] %> 
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

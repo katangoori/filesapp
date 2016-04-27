@@ -1,0 +1,2 @@
+module MydirectoriesHelper
+end

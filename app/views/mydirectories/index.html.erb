@@ -1,0 +1,38 @@
+<% dir = ((request[:path].nil? or request[:path].empty?) ? "/" : request[:path])%>
+<% dirs = dir.split("/") %>
+<% if dirs.size > 1 
+     dirs.pop %>
+  <%= link_to '<- Back', "mydirectories?path=#{dirs.join('/')}" %><br />
+<% end %>
+
+<h1><%= dir %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mydirectories.each do |mydirectory| %>
+      <tr>
+        <td><% if mydirectory.class == Myfile %>
+		      <%= mydirectory.name %>
+		    <% else %>
+		      <a href="mydirectories?path=<%=request[:path]%>/<%=mydirectory.name%>"><%= mydirectory.name %></a>
+			<% end %>  
+	    </td>
+			   
+        <td><%= link_to 'Destroy', "mydirectories/1?path=#{mydirectory.path}&name=#{mydirectory.name}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Directory', "mydirectories/new?path=#{request[:path]}" %><br />
+<%= link_to 'New File', "myfiles/new?path=#{request[:path]}" %>
+
