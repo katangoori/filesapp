@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Files/Directories Under: </h1>
+<br />
+<h3>/ROOT_DIR<%= @entity.root_path %></h3>
+
+<table>
+  <tbody>
+    <% @entities.each do |entity| %>
+      <tr>
+        <td><% if entity.directory? %><%= link_to entity.name, entity %><% else %><%= entity.name %><% end %></td>
+		<td><%= entity.updated_at.localtime.strftime('%A %F %T') %></td>
+        <td><%= link_to 'Edit', edit_entity_path(entity) %></td>
+        <td><%= link_to 'Delete', entity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+  <%= link_to 'Back', @parent ? @parent : entities_path %>
+<br>
+
+<br>
+
+Add new: <%= render 'form' %>
